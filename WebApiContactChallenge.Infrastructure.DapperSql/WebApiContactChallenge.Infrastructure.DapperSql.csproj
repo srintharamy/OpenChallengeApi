@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WebApiContactChallenge.Common\WebApiContactChallenge.Common.csproj" />
+      <ProjectReference Include="..\WebApiContactChallenge.Infrastructure.Interface\WebApiContactChallenge.Infrastructure.Interface.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.0.78" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+    </ItemGroup>
+
+</Project>
