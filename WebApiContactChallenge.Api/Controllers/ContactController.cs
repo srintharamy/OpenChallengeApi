@@ -16,6 +16,10 @@ namespace WebApiContactChallenge.Api.Controllers
         //TODO Use IOC here
         private readonly IContactService _contactService = new ContactService(new UowFactory(new User { Key = "srintharamy@yahoo.fr" }));
 
+        /// <summary>
+        /// Retrieve all Contact
+        /// </summary>
+        /// <remarks>Retrieve all Contact from database</remarks>
         [HttpGet]
         [Route("GetAllContact")]
         public IResponseItems<IContact> GetAllContact()
@@ -23,6 +27,10 @@ namespace WebApiContactChallenge.Api.Controllers
             return CreateResponseItems<IContact>(() => _contactService.GetAllContacts());
         }
 
+        /// <summary>
+        /// Get contact by key
+        /// </summary>
+        /// <remarks>Get contact by key (key is the email, unique identifier)... </remarks>
         [HttpGet]
         [Route("GetContact")]
         public IResponseItem<IContact> GetContact([FromQuery] string key)
@@ -30,6 +38,10 @@ namespace WebApiContactChallenge.Api.Controllers
             return CreateResponseItem<IContact>(() => _contactService.GetByKey(key));
         }
 
+        /// <summary>
+        /// Delete contact by key
+        /// </summary>
+        /// <remarks>Delete contact by key (key is the email, unique identifier)... </remarks>
         [HttpDelete()]
         [Route("DeleteContact")]
         public IResponseItem<bool> Delete([FromQuery] string key)
@@ -42,6 +54,10 @@ namespace WebApiContactChallenge.Api.Controllers
             );
         }
 
+        /// <summary>
+        /// Insert new Contact
+        /// </summary>
+        /// <remarks>See json sample description for the model</remarks>
         [HttpPut]
         [Route("InsertContact")]
         [ValidateModel]
@@ -50,6 +66,10 @@ namespace WebApiContactChallenge.Api.Controllers
             return CreateResponseItem<IContact>(() => _contactService.InsertContact(contact));
         }
 
+        /// <summary>
+        /// Update Contact
+        /// </summary>
+        /// <remarks>See json sample description for the model</remarks>
         [HttpPost]
         [Route("UpdateContact")]
         [ValidateModel]

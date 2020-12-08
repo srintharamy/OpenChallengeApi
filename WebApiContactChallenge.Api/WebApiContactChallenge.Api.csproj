@@ -1,23 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DocumentationFile>bin\Debug\netcoreapp2.0\SwaggerWebApiContactChallenge.xml</DocumentationFile>
+        <NoWarn>1591</NoWarn>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WebApiContactChallenge.Application.Interface\WebApiContactChallenge.Application.Interface.csproj" />
-    <ProjectReference Include="..\WebApiContactChallenge.Application\WebApiContactChallenge.Application.csproj" />
-    <ProjectReference Include="..\WebApiContactChallenge.BusinessObject\WebApiContactChallenge.BusinessObject.csproj" />
-    <ProjectReference Include="..\WebApiContactChallenge.Infrastructure.DapperSql\WebApiContactChallenge.Infrastructure.DapperSql.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\WebApiContactChallenge.Application.Interface\WebApiContactChallenge.Application.Interface.csproj" />
+        <ProjectReference Include="..\WebApiContactChallenge.Application\WebApiContactChallenge.Application.csproj" />
+        <ProjectReference Include="..\WebApiContactChallenge.BusinessObject\WebApiContactChallenge.BusinessObject.csproj" />
+        <ProjectReference Include="..\WebApiContactChallenge.Infrastructure.DapperSql\WebApiContactChallenge.Infrastructure.DapperSql.csproj" />
+    </ItemGroup>
 
 </Project>
