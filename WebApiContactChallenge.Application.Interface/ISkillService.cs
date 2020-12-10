@@ -3,7 +3,7 @@ using WebApiContactChallenge.BusinessObject.BusinessObjects;
 
 namespace WebApiContactChallenge.Application.Interface
 {
-    public interface IContactService : IChallengeServiceBase<Contact>
+    public interface ISkillService : IChallengeServiceBase<Skill>
     {
     }
 }

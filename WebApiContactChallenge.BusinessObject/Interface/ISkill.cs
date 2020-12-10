@@ -1,7 +1,9 @@
+using WebApiContactChallenge.BusinessObject.Base;
+
 namespace WebApiContactChallenge.BusinessObject.Interface
 {
-    public interface ISkill
+    public interface ISkill : IBusinessObjectBaseKey
     {
-        int Level { get; set; }
+        string Description { get; set; }
     }
 }

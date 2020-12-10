@@ -9,7 +9,7 @@ namespace WebApiContactChallenge.Infrastructure.Interface.Base
         IEnumerable<T> Insert(IEnumerable<T> objListToInsert);
         T Insert(T objToInsert);
         T Update(T objToUpdate);
-        IEnumerable<T> Update(IEnumerable<T>objListToUpdate);
+        IEnumerable<T> Update(IEnumerable<T> objListToUpdate);
         bool Delete(T objToDelete);
     }
 }

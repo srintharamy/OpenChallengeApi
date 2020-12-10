@@ -5,6 +5,5 @@ namespace WebApiContactChallenge.Infrastructure.Memory.Repository
 {
     public class SkillRepository : RepositoryBase<Skill>
     {
-
     }
 }

@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using WebApiContactChallenge.BusinessObject.Base;
 
 namespace WebApiContactChallenge.BusinessObject.Interface
 {
-    public interface IContact : IBusinessObjectBase
+    public interface IContact : IBusinessObjectBaseKey
     {
         string FirstName { get; set; }
         string LastName { get; set; }
@@ -11,5 +12,6 @@ namespace WebApiContactChallenge.BusinessObject.Interface
         string PoBox { get; set; }
         string Country { get; set; }
         string MobilePhoneNumber { get; set; }
+        IEnumerable<IContactSkill> MySkills { get; set; }
     }
 }

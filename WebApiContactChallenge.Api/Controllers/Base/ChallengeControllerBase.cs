@@ -1,17 +1,29 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using WebApiContactChallenge.Api.Auth;
 using WebApiContactChallenge.Api.Core;
+using WebApiContactChallenge.Application.Interface.Base;
+using WebApiContactChallenge.BusinessObject.Base;
 
 namespace WebApiContactChallenge.Api.Controllers.Base
 {
-    public class ChallengeControllerBase : ControllerBase
+    public class ChallengeControllerBase<T> : ControllerBase
+        where T : IBusinessObjectBase
     {
+        protected IChallengeServiceBase<T> _service;
+
+        private void SetUserConnected()
+        {
+            _service.UserConnected = Request.Headers[AuthenticationMiddleware.FakeAuthorization];
+        }
+
         protected IResponseItem<TResult> CreateResponseItem<TResult>(
             Func<object> func,
             string message = null)
             where TResult : class
         {
+            SetUserConnected();
             try
             {
                 return new ResponseItem<TResult>
@@ -32,6 +44,7 @@ namespace WebApiContactChallenge.Api.Controllers.Base
             string message = null)
             where TResult : class
         {
+            SetUserConnected();
             try
             {
                 var responseItems = new ResponseItems<TResult>
@@ -51,6 +64,7 @@ namespace WebApiContactChallenge.Api.Controllers.Base
         protected T CreateResponse<T>(Func<T> function)
             where T : ResponseBase, new()
         {
+            SetUserConnected();
             try
             {
                 var response = function();

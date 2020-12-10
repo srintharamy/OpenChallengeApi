@@ -1,4 +1,3 @@
-using System;
 using System.Data.SqlClient;
 using WebApiContactChallenge.BusinessObject.BusinessObjects;
 using WebApiContactChallenge.Infrastructure.DapperSql.Base;
@@ -12,18 +11,18 @@ namespace WebApiContactChallenge.Infrastructure.DapperSql.Repository
         {
         }
 
-        public override string TableName()
+        protected override string TableName()
         {
             return "Contact";
         }
 
-        public override string InsertStatement()
+        protected override string InsertStatement()
         {
             return @"INSERT INTO [Contact] ([Key],[FirstName],[LastName],[Address],[PoBox],[City],[Country],[MobilePhoneNumber],[CreatedDate],[CreatedBy])
             VALUES(@Key,@FirstName,@LastName,@Address,@PoBox,@City,@Country,@MobilePhoneNumber,GETUTCDATE(),@CreatedBy);";
         }
 
-        public override string UpdateStatement()
+        protected override string UpdateStatement()
         {
             return @"UPDATE [Contact] SET [FirstName] = @FirstName,[LastName] = @LastName,[Address] = @Address,[PoBox] = @PoBox,[City] = @City,[Country] = @Country,[MobilePhoneNumber] = @MobilePhoneNumber    
                     ,[UpdatedDate] = GETUTCDATE(),[UpdatedBy] = @UpdatedBy WHERE [Key] = @Key";

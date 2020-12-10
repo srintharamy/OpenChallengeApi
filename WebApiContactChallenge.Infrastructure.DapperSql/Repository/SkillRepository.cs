@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using WebApiContactChallenge.BusinessObject.BusinessObjects;
 using WebApiContactChallenge.Infrastructure.DapperSql.Base;
@@ -6,52 +5,25 @@ using WebApiContactChallenge.Infrastructure.Interface.Repository;
 
 namespace WebApiContactChallenge.Infrastructure.DapperSql.Repository
 {
-    public class SkillRepository : RepositoryBase<Skill> ,ISkillRepository
+    public class SkillRepository : RepositoryBase<Skill>, ISkillRepository
     {
         public SkillRepository(SqlConnection dbConn, User user) : base(dbConn, user)
         {
-
         }
 
-        public override string TableName()
+        protected override string TableName()
         {
             return "Skill";
         }
 
-        public override string InsertStatement()
+        protected override string InsertStatement()
         {
-            throw new System.NotImplementedException();
+            return "INSERT INTO [Skill]([Key],[Description],[CreatedDate],[CreatedBy]) VALUES(@Key,@Description,GETUTCDATE(),@CreatedBy)";
         }
 
-        public override string UpdateStatement()
+        protected override string UpdateStatement()
         {
-            throw new System.NotImplementedException();
+            return "UPDATE [Skill] SET [Description] = @Description ,[UpdateDate] = GETUTCDATE(),[UpdatedBy] = @UpdatedBy WHERE [Key] = @Key";
         }
-
-        public IEnumerable<Skill> Insert(IEnumerable<Skill> objListToInsert)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Skill Insert(Skill objToInsert)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Update(Skill objToUpdate)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Update(IEnumerable<Skill> objListToUpdate)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Delete(Skill objToDelete)
-        {
-            throw new System.NotImplementedException();
-        }
-
     }
 }

@@ -1,81 +1,82 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApiContactChallenge.Api.Controllers.Base;
 using WebApiContactChallenge.Api.Core;
-using WebApiContactChallenge.Application;
 using WebApiContactChallenge.Application.Interface;
 using WebApiContactChallenge.BusinessObject.BusinessObjects;
 using WebApiContactChallenge.BusinessObject.Interface;
-using WebApiContactChallenge.Infrastructure.DapperSql.Base;
 
 namespace WebApiContactChallenge.Api.Controllers
 {
     [Route("api/ContactController/")]
     [ApiController]
-    public class ContactController : ChallengeControllerBase
+    public class ContactController : ChallengeControllerBase<Contact>
     {
-        //TODO Use IOC here
-        private readonly IContactService _contactService = new ContactService(new UowFactory(new User { Key = "srintharamy@yahoo.fr" }));
+        public ContactController(IContactService contactService)
+        {
+            _service = contactService; // inject by ioc
+        }
 
         /// <summary>
-        /// Retrieve all Contact
+        ///     Retrieve all Contact
         /// </summary>
         /// <remarks>Retrieve all Contact from database</remarks>
         [HttpGet]
         [Route("GetAllContact")]
         public IResponseItems<IContact> GetAllContact()
         {
-            return CreateResponseItems<IContact>(() => _contactService.GetAllContacts());
+            var result = CreateResponseItems<IContact>(() => _service.GetAll());
+            return result;
         }
 
         /// <summary>
-        /// Get contact by key
+        ///     Get contact by key
         /// </summary>
         /// <remarks>Get contact by key (key is the email, unique identifier)... </remarks>
         [HttpGet]
         [Route("GetContact")]
         public IResponseItem<IContact> GetContact([FromQuery] string key)
         {
-            return CreateResponseItem<IContact>(() => _contactService.GetByKey(key));
+            return CreateResponseItem<IContact>(() => _service.GetByKey(key));
         }
 
         /// <summary>
-        /// Delete contact by key
+        ///     Delete contact by key
         /// </summary>
         /// <remarks>Delete contact by key (key is the email, unique identifier)... </remarks>
-        [HttpDelete()]
-        [Route("DeleteContact")]
+        [HttpDelete]
+        [Route("Delete")]
         public IResponseItem<bool> Delete([FromQuery] string key)
         {
             return CreateResponse(
                 () => new ResponseItem<bool>
                 {
-                    Item = _contactService.DeleteContact(_contactService.GetByKey(key))
+                    Item = _service.Delete(_service.GetByKey(key))
                 }
             );
         }
 
         /// <summary>
-        /// Insert new Contact
+        ///     Insert new Contact
         /// </summary>
         /// <remarks>See json sample description for the model</remarks>
         [HttpPut]
-        [Route("InsertContact")]
+        [Route("Insert")]
         [ValidateModel]
         public IResponseItem<IContact> Insert([FromBody] Contact contact)
         {
-            return CreateResponseItem<IContact>(() => _contactService.InsertContact(contact));
+            return CreateResponseItem<IContact>(() => _service.Insert(contact));
         }
 
         /// <summary>
-        /// Update Contact
+        ///     Update Contact
         /// </summary>
         /// <remarks>See json sample description for the model</remarks>
         [HttpPost]
-        [Route("UpdateContact")]
+        [Route("Update")]
         [ValidateModel]
         public IResponseItem<IContact> Update([FromBody] Contact contact)
         {
-            return CreateResponseItem<IContact>(() => _contactService.UpdateContact(contact));
+            return CreateResponseItem<IContact>(() => _service.Update(contact));
         }
     }
 }
